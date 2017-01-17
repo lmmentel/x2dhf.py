@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+
+'Some useful methods for running `x2dhf` code'
 
 import argparse
 import os
