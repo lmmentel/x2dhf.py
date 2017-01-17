@@ -109,23 +109,23 @@ def xhf(cliargs=None):
     subparsers = parser.add_subparsers(dest='command')
 
     # create the parser for the "run" command
-    parser_run = subparsers.add_parser('run')
-    parser_run.add_argument('input', type=str, help='input file')
-    parser_run.add_argument('-o', '--output', type=str)
-    parser_run.add_argument('-v', '--verbose', action='store_true')
-    parser_run.set_defaults(func=set_run_defaults)
+    p_run = subparsers.add_parser('run')
+    p_run.add_argument('input', type=str, help='input file')
+    p_run.add_argument('-o', '--output', type=str)
+    p_run.add_argument('-v', '--verbose', action='store_true')
+    p_run.add_argument('-x', '--executable', type=str)
+    p_run.set_defaults(func=set_run_defaults)
 
     # create the parser for the "restart" command
-    parser_run = subparsers.add_parser('copy')
-    parser_run.add_argument('-s', '--source', type=str)
-    parser_run.add_argument('-d', '--dest', type=str)
-    parser_run.set_defaults(func=set_copy_defaults)
+    p_copy = subparsers.add_parser('copy')
+    p_copy.add_argument('-s', '--source', type=str)
+    p_copy.add_argument('-d', '--dest', type=str)
+    p_copy.set_defaults(func=set_copy_defaults)
 
-    # create the parser for the "clean" command
-    parser_run = subparsers.add_parser('clean')
-
-    # create the parser for the "clean" command
-    parser_run = subparsers.add_parser('stop')
+    p_clean = subparsers.add_parser('clean')
+    p_stop = subparsers.add_parser('stop')
+    p_parse = subparsers.add_parser('parse')
+    p_parse.add_argument('filename', type=str)
 
     if cliargs is not None:
         args = parser.parse_args(cliargs)
@@ -140,6 +140,9 @@ def xhf(cliargs=None):
         clean()
     elif args.command == 'stop':
         stop()
+    elif args.command == 'parse':
+        energy = read_output(args.filename)
+        print('{0:20s} : {1:25.15f}'.format(args.filename, energy))
     elif args.command == 'run':
         executable = which('x2dhf')
         if executable is None:
