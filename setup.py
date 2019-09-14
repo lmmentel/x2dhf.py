@@ -9,17 +9,17 @@ import setuptools
 with io.open('README.md', encoding='utf-8') as readme:
     long_description = readme.read()
 
-name = 'x2dhf.py'
-description = 'A module wrapper for x2dhf fortran code'
+NAME = 'x2dhf.py'
+DESCRIPTION = 'A module wrapper for x2dhf fortran code'
 
 setup_params = dict(
-    name=name,
+    name=NAME,
     version='v0.1.0',
     author="Lukasz Mentel",
     author_email="lmmentel@gmail.com",
-    description=description or name,
+    description=DESCRIPTION,
     long_description=long_description,
-    url="https://github.com/lmmentel/x2dhf" + name,
+    url="https://github.com/lmmentel/x2dhf",
     py_modules=['x2dhf'],
     classifiers=[
         "License :: OSI Approved :: MIT License",
